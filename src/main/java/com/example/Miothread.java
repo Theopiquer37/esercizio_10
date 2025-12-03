@@ -71,12 +71,32 @@ public class Miothread extends Thread {
             }else if (path.equals("")) {
                 path = "/index.html";
             }
+            else if (path.startsWith("/style.css")) {
+                path = "/style.css/style.css";
+            }
+            else if (path.startsWith("/script.js")) {
+                path = "/script.js/script.js";
+            }
+            else if (path.startsWith("/images.png")) {
+                path = "/images.png/images.png";
+            }
+            else if (path.startsWith("/images.jpg")) {
+                path = "/images.jpg/images.jpg";
+            }
+            else if (path.startsWith("/images.jpeg")) {
+                path = "/images.jpeg/images.jpeg";
+            }
+            else if (path.startsWith("/images.gif")) {
+                path = "/images.gif/images.gif";
+            }
+
             DataOutputStream outBinary = new DataOutputStream(s.getOutputStream());
             File file = new File("htdocs" + path);
             if (file.exists()){
                 out.println("HTTP/1.1 200 OK");
                 out.println("Content-Type:" + getContentType(path));
                 out.println("Content-Length: " + file.length());
+                out.println("");
                 out.println();
                 InputStream input = new FileInputStream(file);
                 byte[] buf = new byte[8192];
